@@ -1,0 +1,21 @@
+# Canonical 4-species blend for the streamlined NeurIPS training pipeline.
+# Schema: plans/2026-05-06_streamlined_neurips_training.md §6.
+
+parquet:
+  # Parent dir containing {train,val,test}/*.parquet shards.
+  # Override with --parquet-root, or set to a HuggingFace snapshot dir
+  # (e.g. ~/.cache/huggingface/hub/datasets--jeffbbrown2--connectomebench2/...).
+  path: /datasets/connectomebench2
+
+filter:
+  include_species: [mouse, fly, zebrafish, human]
+  include_sample_types: [merge_edit, split_edit, adjacent_control, junction_control, synapse_control]
+
+blend:
+  strategy: sqrt          # natural | uniform_species | uniform_type | uniform_cell | sqrt | custom
+  cell_axis: kind         # kind (3-cell legacy: edits/junction/synapse) | sample_type (5-cell)
+  # Optional per-cell weight overrides. Example:
+  # weights:
+  #   - {species: zebrafish, cell: edits, weight: 0.5}   # downweight zfish edits
+
+class_balance: true

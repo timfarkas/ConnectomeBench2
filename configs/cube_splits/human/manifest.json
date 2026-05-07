@@ -1,0 +1,61 @@
+{
+  "species": "human",
+  "edge_nm": 50000.0,
+  "ratios": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1
+  },
+  "seed": 42,
+  "bbox_nm": {
+    "min": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max": [
+      3801996.0,
+      2329972.0,
+      174603.0
+    ]
+  },
+  "grid": {
+    "nx": 77,
+    "ny": 47,
+    "nz": 4,
+    "bbox_cubes": 14476
+  },
+  "cube_counts": {
+    "occupied": 6257,
+    "train": 5006,
+    "val": 626,
+    "test": 625
+  },
+  "op_counts": {
+    "operation_bank": {
+      "train": 75658,
+      "val": 9684,
+      "test": 9507
+    },
+    "operation_bank_synapse_controls": {
+      "train": 0,
+      "val": 0,
+      "test": 0
+    },
+    "operation_bank_junction_controls": {
+      "train": 293,
+      "val": 35,
+      "test": 47
+    }
+  },
+  "outliers_dropped": {
+    "operation_bank": 0,
+    "operation_bank_synapse_controls": 0,
+    "operation_bank_junction_controls": 0
+  },
+  "duplicate_keys_dropped": {
+    "operation_bank": 0,
+    "operation_bank_synapse_controls": 0,
+    "operation_bank_junction_controls": 0
+  }
+}

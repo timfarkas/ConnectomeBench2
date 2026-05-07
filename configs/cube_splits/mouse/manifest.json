@@ -1,0 +1,61 @@
+{
+  "species": "mouse",
+  "edge_nm": 50000.0,
+  "ratios": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1
+  },
+  "seed": 42,
+  "bbox_nm": {
+    "min": [
+      281400.3214285714,
+      279422.8333333334,
+      593880.0
+    ],
+    "max": [
+      1662008.0,
+      1153688.0,
+      1114400.0
+    ]
+  },
+  "grid": {
+    "nx": 28,
+    "ny": 18,
+    "nz": 11,
+    "bbox_cubes": 5544
+  },
+  "cube_counts": {
+    "occupied": 3794,
+    "train": 3035,
+    "val": 379,
+    "test": 380
+  },
+  "op_counts": {
+    "operation_bank": {
+      "train": 796254,
+      "val": 115042,
+      "test": 96467
+    },
+    "operation_bank_synapse_controls": {
+      "train": 85630,
+      "val": 11567,
+      "test": 10949
+    },
+    "operation_bank_junction_controls": {
+      "train": 87472,
+      "val": 10146,
+      "test": 9759
+    }
+  },
+  "outliers_dropped": {
+    "operation_bank": 0,
+    "operation_bank_synapse_controls": 0,
+    "operation_bank_junction_controls": 0
+  },
+  "duplicate_keys_dropped": {
+    "operation_bank": 0,
+    "operation_bank_synapse_controls": 0,
+    "operation_bank_junction_controls": 0
+  }
+}

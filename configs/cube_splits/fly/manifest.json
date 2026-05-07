@@ -1,0 +1,61 @@
+{
+  "species": "fly",
+  "edge_nm": 50000.0,
+  "ratios": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1
+  },
+  "seed": 42,
+  "bbox_nm": {
+    "min": [
+      82061.36842105263,
+      37912.0,
+      640.0
+    ],
+    "max": [
+      910369.74,
+      461392.4,
+      279864.4
+    ]
+  },
+  "grid": {
+    "nx": 17,
+    "ny": 9,
+    "nz": 6,
+    "bbox_cubes": 918
+  },
+  "cube_counts": {
+    "occupied": 415,
+    "train": 332,
+    "val": 42,
+    "test": 41
+  },
+  "op_counts": {
+    "operation_bank": {
+      "train": 299868,
+      "val": 39179,
+      "test": 39288
+    },
+    "operation_bank_synapse_controls": {
+      "train": 242619,
+      "val": 29294,
+      "test": 38051
+    },
+    "operation_bank_junction_controls": {
+      "train": 174333,
+      "val": 21553,
+      "test": 28475
+    }
+  },
+  "outliers_dropped": {
+    "operation_bank": 826,
+    "operation_bank_synapse_controls": 0,
+    "operation_bank_junction_controls": 0
+  },
+  "duplicate_keys_dropped": {
+    "operation_bank": 0,
+    "operation_bank_synapse_controls": 0,
+    "operation_bank_junction_controls": 0
+  }
+}

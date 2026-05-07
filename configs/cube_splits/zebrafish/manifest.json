@@ -1,0 +1,61 @@
+{
+  "species": "zebrafish",
+  "edge_nm": 50000.0,
+  "ratios": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1
+  },
+  "seed": 42,
+  "bbox_nm": {
+    "min": [
+      182312.0,
+      66328.0,
+      27810.0
+    ],
+    "max": [
+      1608664.0,
+      457736.0,
+      260370.0
+    ]
+  },
+  "grid": {
+    "nx": 29,
+    "ny": 8,
+    "nz": 5,
+    "bbox_cubes": 1160
+  },
+  "cube_counts": {
+    "occupied": 322,
+    "train": 258,
+    "val": 32,
+    "test": 32
+  },
+  "op_counts": {
+    "operation_bank": {
+      "train": 33470,
+      "val": 4363,
+      "test": 2579
+    },
+    "operation_bank_synapse_controls": {
+      "train": 0,
+      "val": 0,
+      "test": 0
+    },
+    "operation_bank_junction_controls": {
+      "train": 539,
+      "val": 94,
+      "test": 50
+    }
+  },
+  "outliers_dropped": {
+    "operation_bank": 0,
+    "operation_bank_synapse_controls": 0,
+    "operation_bank_junction_controls": 0
+  },
+  "duplicate_keys_dropped": {
+    "operation_bank": 0,
+    "operation_bank_synapse_controls": 0,
+    "operation_bank_junction_controls": 0
+  }
+}

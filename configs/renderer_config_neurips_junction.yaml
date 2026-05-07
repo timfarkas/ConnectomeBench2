@@ -1,0 +1,125 @@
+seed: 42
+# staging input: launcher creates empty operation_bank.jsonl + symlinks
+# operation_bank_junction_controls.jsonl -> operation_bank_controls.jsonl
+# (pure-negative pool, mixed with other datasets at dataloader time)
+input_base: scratch/datasets_junction_only/                       # resolved as scratch/datasets_junction_only/{species}/splits/{split}/
+output_base: VLM_Proofreading/neurips_unified/junction_controls/
+
+defaults:
+  image_size: [224, 224]                 # mesh canvas + EM output, FM-native
+  view_extent_nm: [5000, 10000]          # mouse default, per-species overrides below
+  center_jitter_nm: 300
+
+  # geometry-only (7ch npy: normals+depth+mask A/B) + EM via em_cutout block below
+  render_modes: [geometry]
+  geometry:
+    resolution: 224
+    angles: [front, side, top]
+
+  minimap:
+    enabled: false                       # skip for unified run, not used by FM or ViT baseline here
+
+  # dust / chain / adjacency (production prod values, small-fragment-friendly)
+  dust_metric: l2
+  dust_threshold: 5                      # p25 mouse/human
+  dust_threshold_big: 10
+  chain_max_hops: 2
+  chain_proximity_nm: 2500
+  dust_oversample: 4
+
+  # junction-only: adjacency spawned off junction_controls (single-class inflation).
+  # adjacent_controls (endpoint-style "don't merge" pairs) OFF — not relevant here.
+  both_endpoints: true
+  adjacent_controls: false
+  adjacent_junction_samples: true
+  adjacent_cutout_nm: 500
+  max_adjacent_per_op: 0
+  max_adjacent_junction_per_op: 2
+  max_adjacent_junction_samples: null
+  n_random_roots: 0
+
+  # workers (tuned per-species below)
+  setup_workers: 20
+  mesh_workers: 6
+  render_workers: 1
+  total_mesh_memory_gb: 5.0
+
+  # caches
+  full_root_mesh_cache_mb: 50000
+  full_root_mesh_timeout_s: 120
+  l2_mesh_cache_mb: 10000
+  root_size_cache_mb: 1000
+  max_root_l2_count: 18000
+  max_mesh_vertices: 5000000
+  prefetch_cache_mb: 1024
+
+  tasks:
+    - junction_error_id
+
+  em_cutout:
+    enabled: true                        # ON for all species
+    em_mip: 1
+    seg_mip: 0
+    window_nm: 2500                      # mouse default, per-species overrides below
+    views: ["xy", "xz", "yz"]
+    normalize: percentile
+    skip_on_failure: true
+    cardinal_slab: 3
+    best_plane:
+      mode: "add"                        # cardinal + best-oblique
+      angle_step: 10
+      search_slab: 1
+      render_slab: 3
+      inner_frac: 0.75
+    tasks:
+      - junction_error_id
+
+species:
+  mouse:
+    max_samples: 12500
+    mesh_workers: 8
+    em_cutout:
+      enabled: true
+      em_mip: 1
+      seg_mip: 1
+      workers: 8
+
+  fly:
+    max_samples: 12500
+    view_extent_nm: [2000, 4000]
+    dust_threshold: 3
+    dust_threshold_big: 13
+    dust_oversample: 8
+    mesh_workers: 16
+    em_cutout:
+      enabled: true
+      em_mip: 2
+      seg_mip: 0
+      window_nm: 1500
+      workers: 12
+
+  human:
+    max_samples: 12500
+    view_extent_nm: [6000, 12000]
+    dust_threshold: 5
+    dust_threshold_big: 6
+    max_root_l2_count: 6500
+    mesh_workers: 2
+    em_cutout:
+      enabled: true
+      em_mip: 2
+      seg_mip: 1
+      workers: 5
+
+  zebrafish:
+    max_samples: 12500
+    view_extent_nm: [2500, 5000]
+    dust_threshold: 3
+    dust_threshold_big: 6
+    dust_oversample: 16
+    mesh_workers: 4
+    em_cutout:
+      enabled: true
+      em_mip: 1
+      seg_mip: 0
+      window_nm: 1500
